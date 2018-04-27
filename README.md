@@ -1,12 +1,12 @@
 # vue-shared
 vue-shared is a tiny (~150 lines) vue plugin for shared state management, that can be used as an alternative to Vuex.
-It adds a new vue option `shared` where the user sets objects that are shared with all descendent components.
-vue-shared is simply *patching* the shared object supplied, and is using vue's provide/inject mechanism. 
+It adds a new vue option `shared` where the user assigns instances shared with descendent components.
+vue-shared is then patching the instance properties supplied, and is using vue's provide/inject mechanism. 
 
 
 ## Shared objects
 
-A shared object is a simple javascript object, with variables, methods and getters; accessible to all child components in the hierarchy.
+A shared object is a simple javascript object, with variables, methods and getters; accessible to child components in the hierarchy.
 vue-shared will transform the supplied instance such as:
 
 * Variables are moved to the hosting Vue Component (hence become reactive). These variables are accessible to child components but are meant to be readonly (an error is logged when a child modifies it).
