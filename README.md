@@ -46,9 +46,9 @@ vue-shared will transform the supplied instance such as:
 
 ```javascript
 import Vue from 'vue'
-import vue-shared from 'vue-shared'
+import VueShared from 'vue-shared'
 
-Vue.use(vue-shared);
+Vue.use(VueShared);
 
 new Vue({
         el: "#app",
