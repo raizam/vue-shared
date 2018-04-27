@@ -1,13 +1,13 @@
-# What vush is about
-Vush is a tiny (~150 lines) vue plugin for shared state management, that can be used as an alternative to Vuex.
+# What vue-shared is about
+vue-shared is a tiny (~150 lines) vue plugin for shared state management, that can be used as an alternative to Vuex.
 It adds a new vue option `shared` where the user sets objects that are shared with all descendent components.
-Vush is simply *patching* the shared object supplied, and is using vue's provide/inject mechanism. 
+vue-shared is simply *patching* the shared object supplied, and is using vue's provide/inject mechanism. 
 
 
 ## Shared objects
 
 A shared object is a simple javascript object, with variables, methods and getters; accessible to all child components in the hierarchy.
-Vush will transform the supplied instance such as:
+vue-shared will transform the supplied instance such as:
 
 * Variables are moved to the hosting Vue Component and are reactive (moved to `$data._shared_data`). These variables are accessible to child components but are meant to be readonly (an error is logged when a child modifies it).
 * Getters are turned into computed
@@ -15,7 +15,7 @@ Vush will transform the supplied instance such as:
 
 ## Usage
 
-1. Install Vush: `npm i vush`.
+1. Install vue-shared: `npm i vue-shared`.
 
 2. Define a class holding shared states
 ```javascript
@@ -42,13 +42,13 @@ Vush will transform the supplied instance such as:
 
 ```
 
-3. Enable vush and set a shared instance to a Vue instance.
+3. Enable vue-shared and set a shared instance to a Vue instance.
 
 ```javascript
 import Vue from 'vue'
-import Vush from 'vush'
+import vue-shared from 'vue-shared'
 
-Vue.use(Vush);
+Vue.use(vue-shared);
 
 new Vue({
         el: "#app",
@@ -69,10 +69,10 @@ Vue.component('user-name', {
 
 ## Handling asynchronous mutations
 
-Vush is using a watcher, listening to modifications and logs an error when a mutation hasn't been made from a method of the shared object itself.
+vue-shared is using a watcher, listening to modifications and logs an error when a mutation hasn't been made from a method of the shared object itself.
 When a mutation is asynchronous, it is needed to restore the `CallContext` in order to bypass the protection mechanism. 
 
-This is done using the only 2 functions exposed by Vush: `Vush.currentContext` and `Vush.withinContext`
+This is done using the only 2 functions exposed by vue-shared: `vue-shared.currentContext` and `vue-shared.withinContext`
 
 ```javascript
   //a user to be shared
@@ -86,13 +86,13 @@ This is done using the only 2 functions exposed by Vush: `Vush.currentContext` a
     //asynchronous mutation
     updateUsername(){
        //retrieve current context before async call
-       let ctx = Vush.currentContext();
+       let ctx = vue-shared.currentContext();
        
        //async call
        setTimeout(() =>{
        
         //reuse the context
-        Vush.withinContext(ctx, () =>{
+        vue-shared.withinContext(ctx, () =>{
         // apply mutations here
         this.firstName = 'John';
         this.lastName = 'Doe';
