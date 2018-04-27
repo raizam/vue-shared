@@ -1,0 +1,17 @@
+{
+  "name": "vue-shared",
+  "version": "1.0.0",
+  "description": "A tiny vue plugin for shared state management",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "raizam <r4izam@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/raizam/vue-shared#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raizam/vue-shared.git"
+  },
+  "dependencies": {
+    "vue": "^2.5.0"
+  }
+}
