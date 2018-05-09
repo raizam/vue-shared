@@ -1,21 +1,21 @@
 # vue-shared
 vue-shared is a tiny (~150 lines) vue plugin for shared state management, that can be used as an alternative to Vuex.
-It adds a new vue option `shared` where the user assigns instances shared with descendent components.
-vue-shared is then patching the instance properties supplied, and is using vue's provide/inject mechanism. 
+It adds a new vue option `shared` where the user assigns simple javascript objects, that will be patched to be made reactive, and will be shared with descendent components. These shared instances are injected using vue's provide/inject mechanism. 
 
 
 ## Shared objects
 
-A shared object is a simple javascript object, with variables, methods and getters; accessible to child components in the hierarchy.
-vue-shared will transform the supplied instance such as:
+A shared object is a simple javascript object, with properties, methods and getters; vue-shared doesn't require any dependencies. This plugin will transform the supplied instance such as:
 
-* Variables are moved to the hosting Vue Component (hence become reactive). These variables are accessible to child components but are meant to be readonly (an error is logged when a child modifies it).
+* Data properties (referenced variables/objects) are moved to the hosting Vue Component (and become reactive). These variables are accessible to child components but are meant to be readonly (an error is logged when a child modifies it).
 * Getters are turned into computed
 * Methods are meant to be the only way to apply mutations, and are patched as well (in order to bypass the mutation protection).
 
 ## Usage
 
-1. Define a class holding shared states
+1. Install vue-shared  `npm i vue-shared`
+
+2. Define a simple class holding shared states
 ```javascript
   //a user to be shared
   class User
@@ -40,7 +40,7 @@ vue-shared will transform the supplied instance such as:
 
 ```
 
-2. Install vue-shared: `npm i vue-shared`, import and assign a shared instance to a Vue instance.
+3. import vue-shared and assign a shared instance to a Vue instance.
 
 ```javascript
 import Vue from 'vue'
@@ -51,7 +51,7 @@ Vue.use(VueShared);
 new Vue({
         el: "#app",
         shared:{ 
-          $user: function(){ return new User('john', 'doe'); }
+          $user: new User('john', 'doe') //can be either an instance or function returning the instance.
         }
       });
 ```
@@ -99,4 +99,7 @@ This is done using the only 2 functions exposed: `currentContext` and `withinCon
        }, 2000);
     }
 ```
+## Shared object Initialization
+
+If a shared object defines a function `mounted`, this function will be called when the hosting Vue instance is mounted.
 

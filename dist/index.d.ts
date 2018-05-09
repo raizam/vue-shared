@@ -7,12 +7,12 @@ export interface CallContext {
 }
 declare module 'vue/types/options' {
     interface ComponentOptions<V extends Vue> {
-        shared?: Record<string, Function>;
+        shared?: Record<string, Function | object>;
     }
 }
-declare const Vush: {
+declare const VueShared: {
     install: (vue: VueConstructor<Vue>, options?: any) => void;
     currentContext: () => CallContext;
     withinContext: (callContext: CallContext, action: () => void) => void;
 };
-export default Vush;
+export default VueShared;
