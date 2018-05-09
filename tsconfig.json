@@ -8,7 +8,6 @@
     "sourceMap": true,
     "skipDefaultLibCheck": true,
     "strict": false,
-    "types": [ "webpack-env" ],
     "baseUrl": ".",
     "paths": {
       "vue":["../node_modules/vue"]

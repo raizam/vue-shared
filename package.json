@@ -1,6 +1,6 @@
 {
   "name": "vue-shared",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A tiny vue plugin for shared state management",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,6 +12,6 @@
     "url": "https://github.com/raizam/vue-shared.git"
   },
   "dependencies": {
-    "vue": "^2.5.0"
+    "vue": "^2.5.16"
   }
 }

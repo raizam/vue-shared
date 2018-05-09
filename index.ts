@@ -97,7 +97,7 @@ function install(vue: VueConstructor, options?: any) {
 
                 let name = key;
 
-                let obj = ctxFn.call(vueOptions);
+                let obj = typeof ctxFn === 'function' ? ctxFn.call(vueOptions) : ctxFn;
                 let meta = getMetadata(obj);
 
 
@@ -159,6 +159,11 @@ function install(vue: VueConstructor, options?: any) {
 
 
                 }, { deep: true, immediate: true });
+
+                if(instance.initialize)
+                {
+                    instance.initialize();
+                }
 
             });
         }

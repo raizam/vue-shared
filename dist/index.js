@@ -56,7 +56,7 @@ function install(vue, options) {
                 let ctxData = (ctxRootData[key] = {});
                 const ctxFn = this.$options['shared'][key];
                 let name = key;
-                let obj = ctxFn.call(vueOptions);
+                let obj = typeof ctxFn === 'function' ? ctxFn.call(vueOptions) : ctxFn;
                 let meta = getMetadata(obj);
                 for (let getterName in meta.getters) {
                     let fnName = '_computed_' + name + '_get_' + getterName;
@@ -102,6 +102,9 @@ function install(vue, options) {
                         console.error('[Vush] Data should only be mutated from ' + key, n);
                     }
                 }, { deep: true, immediate: true });
+                if (instance.initialize) {
+                    instance.initialize();
+                }
             });
         }
     });
